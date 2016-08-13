@@ -48,7 +48,25 @@ public class MainActivity extends Activity {
         canvas.drawCircle(1000, 1050, 10, paint); //kaidan4
 
 
+        //DrawLine keiro
+        int c=680;
+        paint.setColor(Color.BLUE);
+        paint.setStrokeWidth(10);
+        /*
+        for(i=1;i<5;i++) {
+            canvas.drawLine(700, c+(i*60), 700, c+((i+1)*60), paint);
+        }*/
+        canvas.drawLine(700,680,760,680,paint);
+        canvas.drawLine(700, c, 700, c+((7*60)+10),paint);
+        canvas.drawLine(700,1110,100,1110,paint);
         //canvas.drawText("67.8",90,90,paint);
+
+        //gennzaiti
+        paint.setColor(Color.GREEN);
+        paint.setStyle(Paint.Style.STROKE);
+        canvas.drawCircle(100, 1110, 15, paint);
+        canvas.drawLine(100,1110,133,1110,paint);
+
 
         imageView.setImageBitmap(bitmap);
     }
