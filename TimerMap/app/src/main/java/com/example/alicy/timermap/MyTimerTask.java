@@ -1,4 +1,4 @@
-package com.example.alicy.timer;
+package com.example.alicy.timermap;
 
 import android.content.Context;
 
@@ -22,7 +22,7 @@ public class MyTimerTask extends TimerTask {
         handler.post(new Runnable() {
             @Override
             public void run(){
-                ((MainActivity)context).InvalidateScreen();
+                ((MainActivity)context).InvalidateScreen(5);
             }
         });
     }

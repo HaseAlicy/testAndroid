@@ -1,4 +1,4 @@
-package com.example.alicy.timer;
+package com.example.alicy.timermap;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

@@ -1,9 +1,12 @@
-package com.example.alicy.timer;
+package com.example.alicy.timermap;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -11,11 +14,15 @@ import java.util.TimerTask;
 
 public class MainActivity extends Activity {
     Timer timer;
+    private final int WC = ViewGroup.LayoutParams.WRAP_CONTENT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+     //   ImageView imageView2 = (ImageView)findViewById(R.id.imageView);
+     //   imageView2.setImageResource(R.drawable.figure1);
 
         timer = new Timer();
         TimerTask timerTask = new MyTimerTask(this);
@@ -23,8 +30,12 @@ public class MainActivity extends Activity {
 
     }
 
-    public void InvalidateScreen(){
+    public void InvalidateScreen(int kai){
         MyView myview1 = (MyView)findViewById(R.id.myView1);
+        ImageView imageView2 = (ImageView)findViewById(R.id.imageView);
+        if(kai == 5){
+               imageView2.setImageResource(R.drawable.figure1);
+        }
         myview1.invalidate();//再描画　onDraw()
     }
 
