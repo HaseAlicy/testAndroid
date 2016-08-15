@@ -31,6 +31,8 @@ public class MyView extends View {
     private static int countX = 0;//genzaichi X
     private static int countY = 0;//genzaichi Y
     private static int id=0;//genzaiti muki sikibetusi
+    private static int px,py;//xy position
+    private static int storey=5;// kai
 
     Paint paint = new Paint();
 
@@ -61,27 +63,6 @@ public class MyView extends View {
     protected void onDraw(Canvas canvas){
         super.onDraw(canvas);
 
-        if(countX < 540 ) {
-            countX += 60;
-            id = 0;
-        }
-        else{
-            if(countY <  360){
-                if(countY==0) {
-                    countY += 30;
-                    id = 1;
-                }else{
-                        countY += 60;
-                }
-            }
-            else {
-                if(id != 0) {
-                    id = 0;
-                    countX += 60;
-                }
-            }
-        }
-
         paint.setColor(Color.RED);
         paint.setStyle(Paint.Style.FILL);
         paint.setAntiAlias(true);
@@ -104,22 +85,60 @@ public class MyView extends View {
         canvas.drawCircle(880, 940, 10, paint); //kaidan4
 
 
-        //DrawLine keiro
-        int c=680;
-        paint.setColor(Color.BLUE);
-        paint.setStrokeWidth(10);
-        canvas.drawLine(700,605,640,605,paint);
-        canvas.drawLine(640,605,640,1000,paint);
-        canvas.drawLine(640,996,100,996,paint);
-        //canvas.drawText("67.8",90,90,paint);
+        if(storey == 5) {
+            //DrawLine keiro
+            paint.setColor(Color.BLUE);
+            paint.setStrokeWidth(10);
+            canvas.drawLine(700, 605, 640, 605, paint);
+            canvas.drawLine(640, 605, 640, 1000, paint);
+            canvas.drawLine(640, 996, 100, 996, paint);
+            //canvas.drawText("67.8",90,90,paint);
+        }
+        else if(storey == 4){
+            paint.setColor(Color.BLUE);
+            paint.setStrokeWidth(10);
+            canvas.drawLine(700, 605, 640, 605, paint);
+            canvas.drawLine(640, 605, 640, 545, paint);
+            canvas.drawLine(640, 545, 520, 545, paint);
+            canvas.drawLine(520, 545, 520, 485, paint);
 
-        //basyo idou
+        }
 
-
+        //genzaichi basyo idou
+        if(storey == 5) {
+            if (countX < 540) {
+                countX += 60;
+                id = 0;
+            } else {
+                if (countY < 360) {
+                    if (countY == 0) {
+                        countY += 30;
+                        id = 1;
+                    } else {
+                        countY += 60;
+                    }
+                } else {
+                    if (id != 0) {
+                        id = 0;
+                        countX += 60;
+                    }
+                }
+                if((px == 640) && (py == 606)){
+                    storey=4;
+                }
+            }
+        }
+        else if(storey == 4){
+            if((px==640)&&(py==606)){
+                countX = 0;
+                countY = 0;
+            }
+        }
 
         //gennzaiti
-        int px=100+countX;
-        int py=996-countY;
+        px=100+countX;
+        py=996-countY;
+
         paint.setColor(Color.GREEN);
         paint.setStyle(Paint.Style.STROKE);
         canvas.drawCircle(px, py, 15, paint);//genzaiti
@@ -133,6 +152,14 @@ public class MyView extends View {
             canvas.drawLine(px,py,px,py+33,paint);//sita
         }
 
+    }
+
+    public void setStorey(int exampleStorey){
+        storey = exampleStorey;
+    }
+
+    public int showStorey(){
+        return storey;
     }
 
     public void setExampleString(String exampleString){

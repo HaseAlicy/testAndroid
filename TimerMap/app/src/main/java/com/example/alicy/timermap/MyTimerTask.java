@@ -22,7 +22,7 @@ public class MyTimerTask extends TimerTask {
         handler.post(new Runnable() {
             @Override
             public void run(){
-                ((MainActivity)context).InvalidateScreen(5);
+                ((MainActivity)context).InvalidateScreen();
             }
         });
     }

@@ -30,11 +30,16 @@ public class MainActivity extends Activity {
 
     }
 
-    public void InvalidateScreen(int kai){
+    public void InvalidateScreen(){
+        int kai;
         MyView myview1 = (MyView)findViewById(R.id.myView1);
         ImageView imageView2 = (ImageView)findViewById(R.id.imageView);
+        kai = myview1.showStorey();
         if(kai == 5){
-               imageView2.setImageResource(R.drawable.figure1);
+            imageView2.setImageResource(R.drawable.figure1);
+        }
+        else if(kai == 4){
+            imageView2.setImageResource(R.drawable.test);
         }
         myview1.invalidate();//再描画　onDraw()
     }
