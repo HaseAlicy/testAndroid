@@ -28,6 +28,7 @@ public class MainActivity extends Activity {
     private ImageView imageView;
     private EditText etitText;
     private Button downloadButton;
+    private Place place = new Place();
     private static final String TAG = "MainActivity";
 
     @Override
@@ -49,30 +50,33 @@ public class MainActivity extends Activity {
 
 
     private void taskExe(){
-    //    final String param0 = etitText.getText().toString();
+        //    final String param0 = etitText.getText().toString();
         final String param0 = "http://fujitsu-chizai.azurewebsites.net/api/places/63";
+
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
             Bitmap bmp;
             String str;
 
+
             @Override
             protected Void doInBackground(Void... params) {
-          //      bmp = downloadImage(param0);
+                //      bmp = downloadImage(param0);
                 str = downloadJson(param0);
                 return null;
             }
 
             @Override
             protected void onPostExecute(Void result){
-       //         imageView.setImageBitmap(bmp);
-                //textview.setText(str);
-                try{
-                    str = parseJson(str);
-                    textview.setText(str);
-                }
-                catch(JSONException e){
-                    e.printStackTrace();
-                }
+                //         imageView.setImageBitmap(bmp);
+            //    textview.setText(str);
+                  try{
+                   place = parseJson(str);
+           //     textview.setText(place.x );
+                   textview.setText("x:" + place.x + " y:" + place.y);
+                    }
+                    catch(JSONException e){
+                       e.printStackTrace();
+                   }
 
             }
         };
@@ -183,10 +187,22 @@ public class MainActivity extends Activity {
         return sb.toString();
     }
 
-    private String parseJson(String str) throws JSONException{
+    private Place parseJson(String str) throws JSONException{
+        Place p1 = new Place();
         JSONObject jsonObject = new JSONObject(str);
-        String x = jsonObject.getString("type");
-        return x;
+        p1.id = jsonObject.getString("floor");
+        p1.x = jsonObject.getString("x");
+        p1.y = jsonObject.getString("y");
+        p1.floor = jsonObject.getString("floor");
+        p1.type = jsonObject.getString("type");
+        p1.name = jsonObject.getString("name");
+        p1.lightId = jsonObject.getString("lightId");
+        p1.warpId = jsonObject.getString("warpId");
+        return p1;
     }
 
+
 }
+
+
+
