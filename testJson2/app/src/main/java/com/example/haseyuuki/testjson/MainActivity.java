@@ -12,6 +12,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -46,8 +49,8 @@ public class MainActivity extends Activity {
 
 
     private void taskExe(){
-        final String param0 = etitText.getText().toString();
-
+    //    final String param0 = etitText.getText().toString();
+        final String param0 = "http://fujitsu-chizai.azurewebsites.net/api/places/63";
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
             Bitmap bmp;
             String str;
@@ -62,7 +65,15 @@ public class MainActivity extends Activity {
             @Override
             protected void onPostExecute(Void result){
        //         imageView.setImageBitmap(bmp);
-                textview.setText(str);
+                //textview.setText(str);
+                try{
+                    str = parseJson(str);
+                    textview.setText(str);
+                }
+                catch(JSONException e){
+                    e.printStackTrace();
+                }
+
             }
         };
         task.execute();
@@ -171,4 +182,11 @@ public class MainActivity extends Activity {
         br.close();
         return sb.toString();
     }
+
+    private String parseJson(String str) throws JSONException{
+        JSONObject jsonObject = new JSONObject(str);
+        String x = jsonObject.getString("type");
+        return x;
+    }
+
 }
