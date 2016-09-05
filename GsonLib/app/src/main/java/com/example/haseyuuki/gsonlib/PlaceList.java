@@ -9,5 +9,4 @@ import java.util.List;
  */
 public class PlaceList implements Serializable{
     public List<PlaceMark> places;
-  //  public List<T> Places;
 }

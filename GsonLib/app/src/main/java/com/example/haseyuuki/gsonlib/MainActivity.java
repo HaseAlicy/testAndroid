@@ -38,8 +38,10 @@ public class MainActivity extends Activity {
     private Button downloadButton;
     private PlaceMark placeMark = new PlaceMark();
     private PlaceList placeList = new PlaceList();
-    private User user;
+    private User user = new User();
     private UserList userList = new UserList();
+    private Light light = new Light();
+    private LightList lightList = new LightList();
     private static final String TAG = "MainActivity";
 
     @Override
@@ -61,11 +63,7 @@ public class MainActivity extends Activity {
 
 
     private void taskExe(){
-        //    final String param0 = etitText.getText().toString();
-    //    final String param0 = "http://fujitsu-chizai.azurewebsites.net/api/places/63";
- //       final String param0 = "https://fujitsu-chizai.azurewebsites.net/api/places?floor=6";
-
-        final String param0 = "https://fujitsu-chizai.azurewebsites.net/api/users";
+        final String param0 = "http://fujitsu-chizai.azurewebsites.net/api/lights/601";
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
             Bitmap bmp;
             String str;
@@ -81,19 +79,9 @@ public class MainActivity extends Activity {
             protected void onPostExecute(Void result){
 
                 try {
-               //     placeMark = parseJson(str);
-/*
                     ParseJson parseJson = new ParseJson();
-                    placeList = parseJson.parsePlaceList(str);
-                    placeMark = placeList.places.get(0);
-                    textview.setText(String.valueOf((placeMark.floor)));
-*/
-
-                    ParseJson parseJson = new ParseJson();
-                    userList = parseJson.parseUserList(str);
-                    user = userList.users.get(0);
-                    textview.setText(String.valueOf(user.createdAt));
-
+                    light = parseJson.parseLight(str);
+                    textview.setText(String.valueOf(light.x));
                 }
                 catch(JSONException e){
                     e.printStackTrace();
@@ -150,6 +138,7 @@ public class MainActivity extends Activity {
 
         return str;
     }
+
     //取得したストリームを文字列に変換するメソッド
     static String InputStreamToString(InputStream is) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
@@ -161,23 +150,6 @@ public class MainActivity extends Activity {
         br.close();
         return sb.toString();
     }
-
-//Json文字列をGsonライブラリでパースするメソッド
-    private PlaceMark parseJson(String str) throws JSONException{
-        Gson gson = new Gson();
-        PlaceMark placemark1 = gson.fromJson(str,PlaceMark.class);
-        return placemark1;
-    }
-/*
-    private PlaceList parseJsonList(String json) throws JSONException{
-        Gson gson = new Gson();
-        PlaceList placelist1 = new PlaceList();
-        placelist1 = gson.fromJson(json, PlaceList.class);
-        ArrayList<PlaceMark> Places = new ArrayList<PlaceMark>(placelist1.places);
-        return  placelist1;
-    }
-*/
-
 
 }
 
