@@ -8,5 +8,5 @@ import java.util.List;
  */
 public class LightList implements Serializable {
     //照明情報の配列
-    public List<PlaceMark> lights;
+    public List<Light> lights;
 }

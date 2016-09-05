@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * Created by haseyuuki on 2016/09/05.
  */
 public class ParseJson {
-    private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").create();
+    private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
     private PlaceList placelist1 = new PlaceList();
     private UserList userlist1 = new UserList();
 

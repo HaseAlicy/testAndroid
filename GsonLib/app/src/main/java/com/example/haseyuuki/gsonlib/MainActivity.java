@@ -63,9 +63,9 @@ public class MainActivity extends Activity {
     private void taskExe(){
         //    final String param0 = etitText.getText().toString();
     //    final String param0 = "http://fujitsu-chizai.azurewebsites.net/api/places/63";
-        final String param0 = "https://fujitsu-chizai.azurewebsites.net/api/places?floor=6";
+ //       final String param0 = "https://fujitsu-chizai.azurewebsites.net/api/places?floor=6";
 
-     //   final String param0 = "https://fujitsu-chizai.azurewebsites.net/api/users";
+        final String param0 = "https://fujitsu-chizai.azurewebsites.net/api/users";
         AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
             Bitmap bmp;
             String str;
@@ -82,17 +82,17 @@ public class MainActivity extends Activity {
 
                 try {
                //     placeMark = parseJson(str);
-
+/*
                     ParseJson parseJson = new ParseJson();
                     placeList = parseJson.parsePlaceList(str);
                     placeMark = placeList.places.get(0);
                     textview.setText(String.valueOf((placeMark.floor)));
+*/
 
-
-                //    ParseJson parseJson = new ParseJson();
-                //    userList = parseJson.parseUserList(str);
-              //      user = userList.users.get(0);
-                  //  textview.setText(String.valueOf((user.bornIn)));
+                    ParseJson parseJson = new ParseJson();
+                    userList = parseJson.parseUserList(str);
+                    user = userList.users.get(0);
+                    textview.setText(String.valueOf(user.createdAt));
 
                 }
                 catch(JSONException e){
