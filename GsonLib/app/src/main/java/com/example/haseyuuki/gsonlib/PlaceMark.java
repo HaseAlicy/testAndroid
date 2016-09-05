@@ -1,9 +1,11 @@
 package com.example.haseyuuki.gsonlib;
 
+import java.io.Serializable;
+
 /**
  * Created by haseyuuki on 2016/09/03.
  */
-public class PlaceMark {
+public class PlaceMark implements Serializable{
          /// 地図上に位置する経路案内可能な地点を表します。
                  /// この PlaceMark の場所ID
                  public int id;
