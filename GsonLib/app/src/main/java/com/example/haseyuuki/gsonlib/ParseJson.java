@@ -18,7 +18,7 @@ public class ParseJson {
     private LightList lightlist1 = new LightList();
 
     //Jsonから　PlaceMark 単体へパースを行う
-    private PlaceMark parsePlace(String json) throws JSONException{
+    public PlaceMark parsePlace(String json) throws JSONException{
         placemark1 = gson.fromJson(json,PlaceMark.class);
         return placemark1;
     }

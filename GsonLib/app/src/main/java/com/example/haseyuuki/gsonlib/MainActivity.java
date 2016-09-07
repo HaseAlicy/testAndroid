@@ -8,15 +8,18 @@ import android.os.Bundle;
 import android.renderscript.Type;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,8 +43,10 @@ public class MainActivity extends Activity {
     private PlaceList placeList = new PlaceList();
     private User user = new User();
     private UserList userList = new UserList();
-    private Light light = new Light();
+    private Light light;
     private LightList lightList = new LightList();
+    private String json = null;
+    FujitsuAPI fujitsuAPI = new FujitsuAPI();
     private static final String TAG = "MainActivity";
 
     @Override
@@ -56,99 +61,63 @@ public class MainActivity extends Activity {
         downloadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                taskExe();
+                touch();
             }
         });
+        GetAPI();
     }
 
-
-    private void taskExe(){
-        final String param0 = "http://fujitsu-chizai.azurewebsites.net/api/lights/601";
-        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
-            Bitmap bmp;
-            String str;
-
-
-            @Override
-            protected Void doInBackground(Void... params) {
-                str = downloadJson(param0);
-                return null;
-            }
-
-            @Override
-            protected void onPostExecute(Void result){
-
-                try {
-                    ParseJson parseJson = new ParseJson();
-                    light = parseJson.parseLight(str);
-                    textview.setText(String.valueOf(light.x));
-                }
-                catch(JSONException e){
-                    e.printStackTrace();
-                }
-
-            }
-        };
-        task.execute();
+    @Override
+    protected void onStart(){
+        super.onStart();
     }
 
-//Http　GETメソッド　処理メソッド
-    private String downloadJson(String address) {
-        String str = null;
-
+    public void touch(){
         try {
-            URL url = new URL( address );
+            light = fujitsuAPI.light;
+            lightList = fujitsuAPI.lightList;
+            placeMark = fujitsuAPI.placeMark;
+            placeList = fujitsuAPI.placeList;
+            user = fujitsuAPI.user;
+            userList = fujitsuAPI.userList;
 
-            // HttpURLConnection インスタンス生成
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-
-            // タイムアウト設定
-            urlConnection.setReadTimeout(10000);
-            urlConnection.setConnectTimeout(20000);
-
-            // リクエストメソッド
-            urlConnection.setRequestMethod("GET");
-
-            // リダイレクトを自動で許可しない設定
-            urlConnection.setInstanceFollowRedirects(false);
-
-            // ヘッダーの設定(複数設定可能)
-            urlConnection.setRequestProperty("Accept-Language", "jp");
-
-            // 接続
-            urlConnection.connect();
-
-            int resp = urlConnection.getResponseCode();
-
-            switch (resp){
-                case HttpURLConnection.HTTP_OK:
-                    InputStream is = urlConnection.getInputStream();
-                    str = InputStreamToString(is);
-                    is.close();
-                    break;
-                case HttpURLConnection.HTTP_UNAUTHORIZED:
-                    break;
-                default:
-                    break;
-            }
-        } catch (Exception e) {
-            Log.d(TAG, "downloadJson error");
-            e.printStackTrace();
+            Log.d("MainActivity lightId1",String.valueOf(light.lightId));
+            Log.d("MainActivity lightId2",String.valueOf(lightList.lights.get(1).lightId));
+            Log.d("MainActivity placeId1",String.valueOf(placeMark.id));
+            Log.d("MainActivity placeId2",String.valueOf(placeList.places.get(0).id));
+            Log.d("MainActivity userId1",String.valueOf(user.id));
+            Log.d("MainActivity userId1",String.valueOf(userList.users.get(0).id));
+            
         }
-
-        return str;
+        catch(NullPointerException npe){
+            textview.setText("TextView NullPointException");
+        }
     }
 
-    //取得したストリームを文字列に変換するメソッド
-    static String InputStreamToString(InputStream is) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-        String line;
-        while ((line = br.readLine()) != null) {
-            sb.append(line);
+    public void GetAPI(){
+        try {
+            /*Light API*/
+            fujitsuAPI.lightPoint(601);
+         //   fujitsuAPI.lightAll();
+         //   fujitsuAPI.lightSearch(890,558,6,1000);
+            fujitsuAPI.lightFloor(6);
+
+            /*Place API*/
+            fujitsuAPI.placePoint(63);
+          //  fujitsuAPI.placeAll();
+          //  fujitsuAPI.placeKeyword("実験室");
+          //  fujitsuAPI.placeSearch(890,558,6,1000);
+          //  fujitsuAPI.placeSearchAndKeyword("実験室",890,558,6,1000);
+            fujitsuAPI.placeFloor(6);
+
+            /*User API*/
+            fujitsuAPI.userPoint(1);
+            fujitsuAPI.userAll();
+
         }
-        br.close();
-        return sb.toString();
+        catch(NullPointerException npe){
+            Log.d("FujitsuAPI","NullPointerException");
+        }
     }
 
 }
