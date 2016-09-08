@@ -20,10 +20,38 @@ public class FujitsuAPI {
     public PlaceMark placeMark;
     public PlaceList placeList;
     public Direction direction;
-
+    public Geocode geocode;
 
 
     /*Geocode API*/
+    //指定した照明ID間の座標を取得する
+    public void geocode(int cellingLight,int floorLight){
+        final String url = "https://fujitsu-chizai.azurewebsites.net/api/geocode?ceilingLightId="+cellingLight+"&floorLightId="+floorLight;
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                HttpJson httpJson = new HttpJson();
+                json = httpJson.Get(url);
+                Log.d("doIn",json);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result){
+                try {
+                    ParseJson parseJson = new ParseJson();
+                    geocode = parseJson.parseGeocode(json);
+                    Log.d("onPostExecute:DirectAPI","Geocode Parse Json OK");
+                }
+                catch(JSONException e){
+                    e.printStackTrace();
+                }
+
+            }
+
+        };
+        task.execute();
+    }
 
 
     /*Direction API*/

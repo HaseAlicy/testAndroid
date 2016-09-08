@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
+ * ユーザ情報のクラス
  * Created by haseyuuki on 2016/09/03.
  */
 public class User implements Serializable{

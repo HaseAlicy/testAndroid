@@ -10,12 +10,14 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 /**
+ * Httpの処理用クラス
  * Created by haseyuuki on 2016/09/06.
  */
 public class HttpJson {
     private String json = null;
     private URL url;
 
+    //Getメソッド　指定したアドレスにGetメソッドで通信を行う
     public String Get(String address) {
         try {
             url = new URL( address );

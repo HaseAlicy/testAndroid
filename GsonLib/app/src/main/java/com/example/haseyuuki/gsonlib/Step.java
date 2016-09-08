@@ -3,7 +3,7 @@ package com.example.haseyuuki.gsonlib;
 import java.io.Serializable;
 
 /**
- * 経路の最小単位を表します
+ * 経路の最小単位をもつクラス
  * Created by haseyuuki on 2016/09/07.
  */
 public class Step implements Serializable{

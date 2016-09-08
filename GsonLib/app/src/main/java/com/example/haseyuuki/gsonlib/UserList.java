@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
+ * ユーザ情報リストのクラス
  * Created by haseyuuki on 2016/09/03.
  */
 public class UserList implements Serializable{

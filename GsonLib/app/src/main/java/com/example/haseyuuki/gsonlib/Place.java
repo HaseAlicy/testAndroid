@@ -3,6 +3,7 @@ package com.example.haseyuuki.gsonlib;
 import java.io.Serializable;
 
 /**
+ * 場所情報クラス
  * Created by haseyuuki on 2016/09/03.
  */
 public class Place implements Serializable{

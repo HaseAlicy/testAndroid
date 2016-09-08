@@ -46,6 +46,7 @@ public class MainActivity extends Activity {
     private Light light;
     private LightList lightList;
     private Direction direction;
+    private Geocode geocode;
 
     private String json = null;
     FujitsuAPI fujitsuAPI = new FujitsuAPI();
@@ -83,6 +84,7 @@ public class MainActivity extends Activity {
             user = fujitsuAPI.user;
             userList = fujitsuAPI.userList;
             direction = fujitsuAPI.direction;
+            geocode = fujitsuAPI.geocode;
 
 
             Log.d("MainActivity lightId1",String.valueOf(light.lightId));
@@ -92,6 +94,9 @@ public class MainActivity extends Activity {
             Log.d("MainActivity userId1",String.valueOf(user.id));
             Log.d("MainActivity userId1",String.valueOf(userList.users.get(0).id));
             Log.d("MainActivity DirectX",String.valueOf(direction.routes.get(0).steps.get(0).start.x));
+            Log.d("MainActivity GeocodeX",String.valueOf(geocode.x));
+
+
             textview.setText("");
 
         }
@@ -124,7 +129,8 @@ public class MainActivity extends Activity {
             fujitsuAPI.direction(63,82,PlaceMarkType.Place,PlaceMarkType.Place);
            // fujitsuAPI.directionRegistered(1,63,82,PlaceMarkType.Place,PlaceMarkType.Place);
 
-
+            /*Geocode API*/
+            fujitsuAPI.geocode(604,605);
         }
         catch(NullPointerException npe){
             Log.d("FujitsuAPI","NullPointerException");

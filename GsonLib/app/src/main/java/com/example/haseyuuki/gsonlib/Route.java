@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 案内経路を表します
+ * 案内経路情報のクラス
  * Created by haseyuuki on 2016/09/07.
  */
 public class Route implements Serializable {
