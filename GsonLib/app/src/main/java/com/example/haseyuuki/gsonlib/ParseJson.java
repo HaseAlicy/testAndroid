@@ -16,6 +16,7 @@ public class ParseJson {
     private UserList userlist1 = new UserList();
     private Light light1 = new Light();
     private LightList lightlist1 = new LightList();
+    private Direction direction = new Direction();
 
     //Jsonから　PlaceMark 単体へパースを行う
     public PlaceMark parsePlace(String json) throws JSONException{
@@ -52,6 +53,13 @@ public class ParseJson {
         lightlist1 = gson.fromJson(json, LightList.class);
         return  lightlist1;
     }
+
+    public Direction parseDirection(String json) throws JSONException{
+        direction = gson.fromJson(json, Direction.class);
+        return  direction;
+    }
+
+
 
 }
 

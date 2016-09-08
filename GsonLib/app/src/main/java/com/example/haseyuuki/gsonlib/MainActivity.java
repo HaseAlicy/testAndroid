@@ -39,12 +39,14 @@ public class MainActivity extends Activity {
     private ImageView imageView;
     private EditText etitText;
     private Button downloadButton;
-    private PlaceMark placeMark = new PlaceMark();
-    private PlaceList placeList = new PlaceList();
-    private User user = new User();
-    private UserList userList = new UserList();
+    private PlaceMark placeMark;
+    private PlaceList placeList;
+    private User user;
+    private UserList userList;
     private Light light;
-    private LightList lightList = new LightList();
+    private LightList lightList;
+    private Direction direction;
+
     private String json = null;
     FujitsuAPI fujitsuAPI = new FujitsuAPI();
     private static final String TAG = "MainActivity";
@@ -80,6 +82,8 @@ public class MainActivity extends Activity {
             placeList = fujitsuAPI.placeList;
             user = fujitsuAPI.user;
             userList = fujitsuAPI.userList;
+            direction = fujitsuAPI.direction;
+
 
             Log.d("MainActivity lightId1",String.valueOf(light.lightId));
             Log.d("MainActivity lightId2",String.valueOf(lightList.lights.get(1).lightId));
@@ -87,7 +91,9 @@ public class MainActivity extends Activity {
             Log.d("MainActivity placeId2",String.valueOf(placeList.places.get(0).id));
             Log.d("MainActivity userId1",String.valueOf(user.id));
             Log.d("MainActivity userId1",String.valueOf(userList.users.get(0).id));
-            
+            Log.d("MainActivity DirectX",String.valueOf(direction.routes.get(0).steps.get(0).start.x));
+            textview.setText("");
+
         }
         catch(NullPointerException npe){
             textview.setText("TextView NullPointException");
@@ -113,6 +119,11 @@ public class MainActivity extends Activity {
             /*User API*/
             fujitsuAPI.userPoint(1);
             fujitsuAPI.userAll();
+
+            /*Direction API*/
+            fujitsuAPI.direction(63,82,PlaceMarkType.Place,PlaceMarkType.Place);
+           // fujitsuAPI.directionRegistered(1,63,82,PlaceMarkType.Place,PlaceMarkType.Place);
+
 
         }
         catch(NullPointerException npe){

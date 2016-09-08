@@ -19,6 +19,69 @@ public class FujitsuAPI {
     public UserList userList;
     public PlaceMark placeMark;
     public PlaceList placeList;
+    public Direction direction;
+
+
+
+    /*Geocode API*/
+
+
+    /*Direction API*/
+    //2点間の経路案内情報を取得
+    public void direction(int originId,int destinationId,PlaceMarkType originType,PlaceMarkType destinationType){
+        final String url = "https://fujitsu-chizai.azurewebsites.net/api/directions?originId="+originId+"&destinationId="+destinationId+"&originType="+originType+"&destinationType="+destinationType;
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                HttpJson httpJson = new HttpJson();
+                json = httpJson.Get(url);
+                Log.d("doIn",json);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result){
+                try {
+                    ParseJson parseJson = new ParseJson();
+                    direction = parseJson.parseDirection(json);
+                    Log.d("onPostExecute:DirectAPI","Direction Parse Json OK");
+                }
+                catch(JSONException e){
+                    e.printStackTrace();
+                }
+            }
+
+        };
+        task.execute();
+    }
+
+    //2点間の経路案内情報の取得と指定したUserIdの経路検索情報としてDBに保存
+    public void directionRegistered(int userId,int originId,int destinationId,PlaceMarkType originType,PlaceMarkType destinationType){
+        final String url = "https://fujitsu-chizai.azurewebsites.net/api/directions?originId="+String.valueOf(originId)+"&destinationId="+String.valueOf(destinationId)+"&userId="+String.valueOf(userId)+"&originType="+originType+"&destinationType="+destinationType;
+        AsyncTask<Void, Void, Void> task = new AsyncTask<Void, Void, Void>(){
+            @Override
+            protected Void doInBackground(Void... params) {
+                HttpJson httpJson = new HttpJson();
+                json = httpJson.Get(url);
+                Log.d("doIn",json);
+                return null;
+            }
+
+            @Override
+            protected void onPostExecute(Void result){
+                try {
+                    ParseJson parseJson = new ParseJson();
+                    direction = parseJson.parseDirection(json);
+                    Log.d("onPostExecute:DirectAPI","DirectionRegistered Parse Json OK");
+                }
+                catch(JSONException e){
+                    e.printStackTrace();
+                }
+            }
+
+        };
+        task.execute();
+    }
 
 
     /*User API*/
