@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by haseyuuki on 2016/09/05.
  */
 public class ParseJson {
-    private Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
+    private static Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss").create();
     private PlaceMark placemark1 = new PlaceMark();
     private PlaceList placelist1 = new PlaceList();
     private User user1 = new User();
@@ -33,9 +33,8 @@ public class ParseJson {
 
 
     //Jsonから　User単体へパースを行う
-    public User parseUser(String json) throws JSONException {
-        user1 = gson.fromJson(json, User.class);
-        return  user1;
+    public static User parseUser(String json) throws JSONException {
+        return gson.fromJson(json, User.class);
     }
     //Jsonから　User配列へパースを行う
     public UserList parseUserList(String json) throws JSONException {
@@ -66,7 +65,9 @@ public class ParseJson {
         return geocode;
     }
 
-
+    public static String toJson(Object obj) {
+        return gson.toJson(obj);
+    }
 
 }
 

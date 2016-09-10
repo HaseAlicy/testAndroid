@@ -1,11 +1,11 @@
 package com.example.haseyuuki.fujitsuchizaihase;
 
-import android.util.Log;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
@@ -55,7 +55,7 @@ public class HttpJson {
     }
 
     //取得したストリームを文字列に変換するメソッド
-    public String InputStreamToString(InputStream is) throws IOException {
+    public static String InputStreamToString(InputStream is) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(is));
         StringBuilder sb = new StringBuilder();
         String line;
@@ -66,6 +66,45 @@ public class HttpJson {
         return sb.toString();
     }
 
+    public static String Post(String address, String json) {
+        String response = null;
+        HttpURLConnection con = null;
+        try {
+            // 設定
+            URL url = new URL(address);
+            con = (HttpURLConnection)url.openConnection();
+            con.setReadTimeout(10000);
+            con.setConnectTimeout(20000);
+            con.setRequestMethod("POST");
+            con.setInstanceFollowRedirects(false);
+            con.setRequestProperty("Accept-Language", "jp");
+            con.setDoOutput(true);
+            con.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+
+            // 送信
+            OutputStream os = con.getOutputStream();
+            PrintStream ps = new PrintStream(os);
+            ps.print(json);
+            ps.close();
+
+            // 受信
+            int res = con.getResponseCode();
+            switch (res){
+                case HttpURLConnection.HTTP_OK:
+                    InputStream is = con.getInputStream();
+                    response = InputStreamToString(is);
+                    is.close();
+                    break;
+                case HttpURLConnection.HTTP_BAD_REQUEST:
+                    throw new Exception("HTTP_BAD_REQUEST");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            con.disconnect();
+        }
+        return  response;
+    }
 }
 
 /*

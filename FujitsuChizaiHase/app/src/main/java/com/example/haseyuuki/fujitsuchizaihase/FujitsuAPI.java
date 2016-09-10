@@ -452,4 +452,11 @@ public class FujitsuAPI {
     }
 
 
+    public static class Users {
+        private static final String endpoint = "http://fujitsu-chizai.azurewebsites.net/api/users";
+
+        public static void register(User user, AsyncCallback callback) {
+            new AsyncHttpPostRequest(callback).execute(endpoint, ParseJson.toJson(user));
+        }
+    }
 }
