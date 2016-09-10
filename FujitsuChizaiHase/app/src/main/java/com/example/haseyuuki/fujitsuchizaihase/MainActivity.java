@@ -1,8 +1,11 @@
 package com.example.haseyuuki.fujitsuchizaihase;
 
+import android.content.ActivityNotFoundException;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,9 +15,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
+import android.widget.Toast;
+
+import java.io.NotActiveException;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +48,25 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
 /*
+        Button button = (Button)findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                   Intent intent = new Intent(MainActivity.this, RouteSearchActivity.class);
+                try {
+                   startActivity(intent);
+                   Log.d("onClick","intent");
+               }
+               catch(NullPointerException e){
+                   Log.d("onClick","Exception");
+               }
+
+            }
+        });
+*/
+    }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -51,7 +76,7 @@ public class MainActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
-*/
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -61,9 +86,27 @@ public class MainActivity extends AppCompatActivity
 
         if (id == R.id.nav_search) {
             // Handle the camera action
+            Intent intent = new Intent(MainActivity.this, RouteSearchActivity.class);
+            try {
+                startActivity(intent);
+                Log.d("onClick","intent");
+            }
+            catch(NullPointerException e){
+                Log.d("onClick","Exception");
+            }
+
         }
 
         else if (id == R.id.nav_setting) {
+            // Handle the camera action
+            Intent intent = new Intent(MainActivity.this, RouteSearchActivity.class);
+            try {
+                startActivity(intent);
+                Log.d("onClick","intent");
+            }
+            catch(NullPointerException e){
+                Log.d("onClick","Exception");
+            }
 
         }
           /*else if (id == R.id.nav_slideshow) {
@@ -81,4 +124,6 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
 }
