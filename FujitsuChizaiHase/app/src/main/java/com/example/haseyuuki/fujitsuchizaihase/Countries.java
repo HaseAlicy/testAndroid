@@ -200,5 +200,16 @@ public enum Countries {
     VietNam,
     Yemen,
     Zambia,
-    Zimbabwe
+    Zimbabwe;
+
+    private static final Countries defValue = Japan; //デフォルトを「Japan」に設定
+    //文字列と照合して Enum 型で返す
+    public static final Countries toEnum(String str) {
+        for (Countries e : Countries.values()) {
+            if (str.equalsIgnoreCase(e.toString())) {
+                return e;
+            }
+        }
+        return defValue;
+    }
 }

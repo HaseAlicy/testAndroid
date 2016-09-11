@@ -8,6 +8,47 @@
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
 
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="ユーザ登録"
+                android:id="@+id/textView2"
+                android:gravity="center" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="以下のボタンよりユーザ登録ページに進んでください。"
+                android:id="@+id/textView4" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="40px" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="登録ページ"
+                android:id="@+id/button2"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+
     <include
         layout="@layout/app_bar_main"
         android:layout_width="match_parent"

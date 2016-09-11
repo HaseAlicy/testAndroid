@@ -23,6 +23,11 @@
         </activity>
         <activity android:name=".RouteSearchActivity">
         </activity>
+        <activity android:name=".UserRegist">
+        </activity>
+        <activity android:name=".UserRegistFin">
+        </activity>
+
     </application>
 
 </manifest>
