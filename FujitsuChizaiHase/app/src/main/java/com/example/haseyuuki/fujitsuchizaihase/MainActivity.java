@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         btnDisp.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // 登録画面へ遷移
-                Intent intent = new Intent(getApplication(), UserRegist.class);
+                Intent intent = new Intent(getApplication(), DebugPage.class);
                 startActivity(intent);
             }
         });

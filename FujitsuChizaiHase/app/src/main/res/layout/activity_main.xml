@@ -43,7 +43,7 @@
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="登録ページ"
+                android:text="デバッグページ"
                 android:id="@+id/button2"
                 android:gravity="center" />
         </LinearLayout>
