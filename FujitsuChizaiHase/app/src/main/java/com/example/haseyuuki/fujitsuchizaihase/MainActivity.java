@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             getAPI = true;
         }
 
-
+/*
         //校内図表示
         ImageView imageView2 = (ImageView)findViewById(R.id.imageView);
         Resources res = getResources();
@@ -105,6 +107,17 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+*/
+        Button btnDisp = (Button)findViewById(R.id.button2);
+        btnDisp.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // 登録画面へ遷移
+                Intent intent = new Intent(getApplication(), DebugPage.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     @Override
